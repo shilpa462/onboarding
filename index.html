@@ -587,7 +587,18 @@ function buildLog(){
   Object.entries(p2OpenTexts).forEach(([k,v])=>{
     lines.push(`${bLabels[k]}: ${v.trim()||'(skipped)'}`);
   });
-  document.getElementById('r-log').textContent=lines.join('\n');
+  const logText=lines.join('\n');
+  document.getElementById('r-log').textContent=logText;
+  submitToGoogle(logText);
+}
+
+function submitToGoogle(logText){
+  try{
+    const formUrl='https://docs.google.com/forms/d/e/1FAIpQLSc2DqahZ2z3tuPD7o09_GcFzaRZFs7HKZ1thMcUUixBnFiHfA/formResponse';
+    const data=new FormData();
+    data.append('entry.1750355383', logText);
+    fetch(formUrl,{method:'POST',body:data,mode:'no-cors'}).catch(()=>{});
+  } catch(e){}
 }
 
 function copyLog(){
