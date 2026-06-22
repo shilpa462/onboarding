@@ -1,654 +1,343 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>150 by YouLabs — Content & Communication Style</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>150 by YouLabs — Content &amp; Communication Style</title>
 <style>
-*{box-sizing:border-box;margin:0;padding:0}
-body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#F5F3EE;color:#1A1A1A;min-height:100vh}
-.screen{display:none;flex-direction:column;min-height:100vh}
-.screen.active{display:flex}
-.center{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:40px 24px;text-align:center;max-width:480px;margin:0 auto;width:100%}
-.brand{font-size:11px;font-weight:600;letter-spacing:.1em;color:#0F6E56;text-transform:uppercase;margin-bottom:28px}
-.big-title{font-size:26px;font-weight:500;line-height:1.3;color:#1A1A1A;margin-bottom:14px}
-.sub{font-size:15px;color:#5F5E5A;line-height:1.7;margin-bottom:32px}
-.time-pill{display:inline-flex;align-items:center;gap:6px;background:#E1F5EE;color:#0F6E56;font-size:12px;font-weight:500;padding:6px 14px;border-radius:20px;margin-bottom:28px}
-.pill-row{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-bottom:28px}
-.pill{font-size:12px;padding:5px 12px;border-radius:20px;font-weight:500}
-.p1-pill{background:#E1F5EE;color:#085041}
-.p2-pill{background:#EEEDFE;color:#26215C}
-.primary-btn{background:#1A1A1A;color:#F5F3EE;border:none;padding:15px 40px;border-radius:50px;font-size:15px;font-weight:500;cursor:pointer;width:100%;max-width:320px;transition:opacity .15s}
-.primary-btn:hover{opacity:.85}
-.outline-btn{background:transparent;border:1.5px solid #1A1A1A;color:#1A1A1A;padding:13px 32px;border-radius:50px;font-size:14px;font-weight:500;cursor:pointer;width:100%;transition:all .15s}
-.outline-btn:hover{background:#1A1A1A;color:#F5F3EE}
-.quiz-hd{padding:20px 24px 0;max-width:520px;margin:0 auto;width:100%}
-.prog-row{display:flex;align-items:center;gap:10px;margin-bottom:8px}
-.prog-track{flex:1;height:3px;background:#D3D1C7;border-radius:2px;overflow:hidden}
-.prog-fill{height:100%;background:#0F6E56;border-radius:2px;transition:width .4s ease}
-.prog-lbl{font-size:12px;color:#888780;white-space:nowrap}
-.part-badge{font-size:10px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;padding:3px 10px;border-radius:20px;margin-bottom:16px;display:inline-block}
-.pb1{background:#E1F5EE;color:#085041}
-.pb2{background:#EEEDFE;color:#26215C}
-.quiz-body{flex:1;padding:0 24px 40px;max-width:520px;margin:0 auto;width:100%}
-.q-cat{font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:#0F6E56;margin-bottom:10px}
-.q-txt{font-size:20px;font-weight:500;line-height:1.4;color:#1A1A1A;margin-bottom:24px}
-.options{display:flex;flex-direction:column;gap:10px}
-.opt{background:#FFF;border:1.5px solid #E5E3DC;border-radius:14px;padding:15px 17px;cursor:pointer;display:flex;align-items:flex-start;gap:12px;transition:all .15s}
-.opt:hover{border-color:#0F6E56;background:#F2FAF7}
-.opt.sel{border-color:#0F6E56;background:#E1F5EE}
-.opt-lt{width:26px;height:26px;border-radius:50%;background:#F1EFE8;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600;color:#888780;flex-shrink:0;margin-top:1px;transition:all .15s}
-.opt.sel .opt-lt{background:#0F6E56;color:#FFF}
-.opt-tx{font-size:14px;line-height:1.55;color:#444441}
-.opt.sel .opt-tx{color:#085041;font-weight:500}
-.next-btn{margin-top:24px;background:#1A1A1A;color:#F5F3EE;border:none;padding:14px 32px;border-radius:50px;font-size:14px;font-weight:500;cursor:pointer;width:100%;opacity:.3;pointer-events:none;transition:opacity .2s}
-.next-btn.on{opacity:1;pointer-events:auto}
-.next-btn:hover{opacity:.85}
-.transition-wrap{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:40px 24px;text-align:center;max-width:480px;margin:0 auto;width:100%}
-.persona-badge{display:inline-block;font-size:11px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;padding:5px 14px;border-radius:20px;margin-bottom:14px}
-.t-title{font-size:26px;font-weight:500;line-height:1.25;color:#1A1A1A;margin-bottom:12px}
-.t-body{font-size:14px;color:#5F5E5A;line-height:1.7;margin-bottom:28px}
-.t-divider{width:40px;height:2px;background:#E5E3DC;margin:20px auto}
-.t-next-label{font-size:13px;color:#5F5E5A;margin-bottom:20px;line-height:1.6}
-.wa-screen{background:#FFF;border-radius:16px;padding:14px;border:.5px solid #E5E3DC;margin-bottom:14px}
-.wa-top{display:flex;align-items:center;gap:8px;padding-bottom:10px;border-bottom:.5px solid #E5E3DC;margin-bottom:12px}
-.wa-av{width:30px;height:30px;border-radius:50%;background:#E1F5EE;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:600;color:#085041;flex-shrink:0}
-.wa-name{font-size:12px;font-weight:500;color:#1A1A1A}
-.wa-sub{font-size:10px;color:#888780}
-.wa-bubble{background:#F5F3EE;border-radius:2px 10px 10px 10px;padding:9px 12px;font-size:12px;color:#444441;line-height:1.65;max-width:90%;margin-bottom:4px}
-.wa-bubble b{color:#1A1A1A;font-weight:500;display:block;margin-bottom:3px}
-.wa-bubble .wa-tag{display:inline-block;font-size:10px;font-weight:600;padding:2px 8px;border-radius:20px;margin-bottom:5px}
-.wa-time{font-size:10px;color:#B4B2A9;text-align:right;margin-top:4px}
-.wa-action{display:flex;align-items:center;gap:5px;margin-top:8px;font-size:11px;color:#185FA5;padding-top:7px;border-top:.5px solid #E5E3DC;font-weight:500}
-.wa-voice{background:#F1EFE8;border-radius:20px;padding:7px 10px;display:flex;align-items:center;gap:8px;margin:4px 0}
-.wa-play{width:22px;height:22px;border-radius:50%;background:#E1F5EE;display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.wa-wave{flex:1;height:18px;display:flex;align-items:center;gap:1.5px}
-.wa-bar{width:2px;border-radius:1px;background:#B4B2A9}
-.wa-dur{font-size:10px;color:#888780}
-.react-label{font-size:11px;color:#888780;margin:12px 0 8px}
-.react-row{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
-.r-btn{padding:7px 14px;border-radius:20px;font-size:12px;border:1px solid #E5E3DC;background:#FFF;color:#5F5E5A;cursor:pointer;display:flex;align-items:center;gap:5px;transition:all .15s;font-family:inherit}
-.r-btn:hover{border-color:#1A1A1A;color:#1A1A1A}
-.r-btn.r-love{background:#E1F5EE;border-color:#0F6E56;color:#085041;font-weight:500}
-.r-btn.r-ok{background:#FAEEDA;border-color:#BA7517;color:#412402;font-weight:500}
-.r-btn.r-no{background:#FCEBEB;border-color:#E24B4A;color:#791F1F;font-weight:500}
-.fq-label{font-size:12px;font-weight:500;color:#1A1A1A;margin-bottom:8px}
-.fq-opts{display:flex;flex-direction:column;gap:6px;margin-bottom:16px}
-.fq-opt{padding:9px 12px;border-radius:var(--border-radius-md,8px);font-size:12px;border:1px solid #E5E3DC;background:#FFF;color:#5F5E5A;cursor:pointer;text-align:left;transition:all .15s;font-family:inherit}
-.fq-opt:hover{border-color:#0F6E56;background:#F2FAF7;color:#085041}
-.fq-opt.sel{background:#E1F5EE;border-color:#0F6E56;color:#085041;font-weight:500}
-.bucket-break{background:#FFF;border:1px solid #E5E3DC;border-radius:14px;padding:18px;margin-bottom:4px}
-.bb-label{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.07em;color:#888780;margin-bottom:8px}
-.bb-title{font-size:14px;font-weight:500;color:#1A1A1A;margin-bottom:6px}
-.bb-sub{font-size:12px;color:#5F5E5A;line-height:1.6;margin-bottom:12px}
-.bb-ta{width:100%;min-height:72px;border:1px solid #E5E3DC;border-radius:8px;padding:10px 12px;font-size:12px;color:#1A1A1A;background:#F5F3EE;resize:none;font-family:inherit;line-height:1.6;outline:none}
-.bb-ta:focus{border-color:#0F6E56}
-.bb-foot{display:flex;align-items:center;justify-content:space-between;margin-top:10px}
-.skip-lnk{font-size:11px;color:#B4B2A9;text-decoration:underline;text-underline-offset:2px;cursor:pointer;background:none;border:none;font-family:inherit}
-.sm-btn{background:#1A1A1A;color:#F5F3EE;border:none;padding:9px 20px;border-radius:20px;font-size:12px;font-weight:500;cursor:pointer;transition:opacity .15s;font-family:inherit}
-.sm-btn:hover{opacity:.8}
-.sm-btn:disabled{opacity:.35;pointer-events:none}
-.result-wrap{flex:1;padding:36px 24px 40px;max-width:520px;margin:0 auto;width:100%}
-.r-brand{font-size:11px;font-weight:600;letter-spacing:.1em;color:#0F6E56;text-transform:uppercase;margin-bottom:20px}
-.r-title{font-size:26px;font-weight:500;line-height:1.25;color:#1A1A1A;margin-bottom:10px}
-.r-tagline{font-size:14px;color:#5F5E5A;line-height:1.7;margin-bottom:24px;padding-bottom:24px;border-bottom:1px solid #E5E3DC}
-.sec-lbl{font-size:11px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;color:#888780;margin-bottom:10px;margin-top:20px}
-.insight-card{background:#FFF;border:1px solid #E5E3DC;border-radius:12px;padding:14px 16px;margin-bottom:8px}
-.ic-top{display:flex;align-items:center;gap:10px;margin-bottom:6px}
-.ic-icon{width:28px;height:28px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0}
-.ic-name{font-size:13px;font-weight:500;color:#1A1A1A}
-.ic-verdict{display:inline-block;font-size:10px;font-weight:600;padding:2px 8px;border-radius:20px}
-.v-keep{background:#E1F5EE;color:#085041}
-.v-evolve{background:#FAEEDA;color:#412402}
-.v-drop{background:#FCEBEB;color:#791F1F}
-.ic-body{font-size:12px;color:#5F5E5A;line-height:1.55}
-.score-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:20px}
-.sc{background:#F5F3EE;border-radius:10px;padding:12px;text-align:center}
-.sc-val{font-size:20px;font-weight:500;margin-bottom:3px}
-.sc-lbl{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:#888780}
-.open-text-section{background:#FFF;border:1px solid #E5E3DC;border-radius:12px;padding:14px 16px;margin-bottom:8px}
-.ot-bucket{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.07em;margin-bottom:4px}
-.ot-text{font-size:12px;color:#5F5E5A;line-height:1.6;font-style:italic}
-.ot-empty{font-size:12px;color:#B4B2A9;font-style:italic}
-.log-box{background:#F5F3EE;border:1px solid #E5E3DC;border-radius:12px;padding:14px 16px;margin-bottom:20px;font-size:11px;color:#5F5E5A;line-height:1.8;font-family:monospace;white-space:pre-wrap;word-break:break-word;max-height:240px;overflow-y:auto}
-.copy-btn{background:#FFF;border:1px solid #E5E3DC;color:#1A1A1A;padding:9px 20px;border-radius:20px;font-size:12px;font-weight:500;cursor:pointer;display:flex;align-items:center;gap:6px;transition:all .15s;font-family:inherit;margin-bottom:12px}
-.copy-btn:hover{background:#1A1A1A;color:#FFF}
-.tracker-card{border:.5px solid #E5E3DC;border-radius:10px;padding:10px 12px;margin-bottom:8px;background:#FFF}
-.tc-title{font-size:11px;font-weight:600;color:#1A1A1A;margin-bottom:8px}
-.pillars{display:flex;gap:6px}
-.pillar{flex:1;border-radius:6px;padding:7px 4px;text-align:center;font-size:9px;font-weight:600}
-.p-done{background:#E1F5EE;color:#085041}
-.p-proc{background:#FAEEDA;color:#412402}
-.p-pend{background:#F1EFE8;color:#888780}
-.prec-num{font-size:26px;font-weight:500;color:#0F6E56;line-height:1;margin:6px 0 2px}
-.prec-bar{height:5px;border-radius:3px;background:#F1EFE8;margin:8px 0 3px;overflow:hidden}
-.prec-fill{height:100%;border-radius:3px;background:#1D9E75;width:75%}
+  /* ── PASTE YOUR APPS SCRIPT WEB APP URL BELOW ── */
+  /* const SUBMIT_URL = "https://script.google.com/macros/s/YOUR_SCRIPT_ID/exec"; */
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #ffffff;
+    --bg2: #f5f5f3;
+    --text: #1a1a18;
+    --text2: #6b6b66;
+    --text3: #a0a09a;
+    --border: rgba(0,0,0,0.12);
+    --border2: rgba(0,0,0,0.22);
+    --radius: 8px;
+    --radius-lg: 12px;
+    --font: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #1a1a18;
+      --bg2: #242422;
+      --text: #f0f0ec;
+      --text2: #9a9a94;
+      --text3: #666660;
+      --border: rgba(255,255,255,0.12);
+      --border2: rgba(255,255,255,0.22);
+    }
+  }
+
+  body { font-family: var(--font); background: var(--bg); color: var(--text); min-height: 100vh; }
+
+  .wrap { max-width: 600px; margin: 0 auto; padding: 2.5rem 1.5rem 4rem; }
+
+  .brand { font-size: 13px; font-weight: 500; color: var(--text2); letter-spacing: 0.04em; margin-bottom: 2rem; }
+  .hero-title { font-size: 24px; font-weight: 500; line-height: 1.35; margin-bottom: 1rem; }
+  .hero-sub { font-size: 15px; color: var(--text2); line-height: 1.6; margin-bottom: 2rem; }
+
+  .parts-row { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 2rem; }
+  .part-badge { background: var(--bg2); border: 0.5px solid var(--border); border-radius: var(--radius); padding: 7px 13px; font-size: 13px; color: var(--text2); }
+
+  .time-note { font-size: 13px; color: var(--text3); margin-bottom: 2rem; }
+
+  .btn-primary { background: var(--text); color: var(--bg); border: none; border-radius: var(--radius); padding: 12px 24px; font-size: 15px; font-weight: 500; cursor: pointer; font-family: var(--font); display: inline-block; }
+  .btn-primary:hover { opacity: 0.85; }
+  .btn-primary:disabled { opacity: 0.4; cursor: not-allowed; }
+
+  .btn-ghost { background: transparent; color: var(--text); border: 0.5px solid var(--border2); border-radius: var(--radius); padding: 10px 20px; font-size: 14px; cursor: pointer; font-family: var(--font); }
+  .btn-ghost:hover { background: var(--bg2); }
+
+  .progress-wrap { height: 2px; background: var(--border); border-radius: 2px; margin-bottom: 2rem; }
+  .progress-fill { height: 2px; background: var(--text); border-radius: 2px; transition: width 0.3s; }
+
+  .q-label { font-size: 11px; color: var(--text3); letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 1rem; }
+  .q-text { font-size: 18px; font-weight: 500; line-height: 1.4; margin-bottom: 1.75rem; }
+
+  .opt-list { display: flex; flex-direction: column; gap: 10px; margin-bottom: 2rem; }
+  .opt-btn { background: var(--bg); border: 0.5px solid var(--border); border-radius: var(--radius); padding: 14px 16px; font-size: 14px; color: var(--text); cursor: pointer; text-align: left; font-family: var(--font); line-height: 1.5; transition: border-color 0.12s; }
+  .opt-btn:hover { border-color: var(--border2); background: var(--bg2); }
+  .opt-btn.sel { border: 1.5px solid var(--text); background: var(--bg2); }
+
+  .nav-row { display: flex; align-items: center; justify-content: space-between; margin-top: 0.5rem; }
+  .step-ct { font-size: 13px; color: var(--text3); }
+
+  .check-circle { width: 48px; height: 48px; border-radius: 50%; background: var(--bg2); display: flex; align-items: center; justify-content: center; margin-bottom: 1.5rem; font-size: 22px; color: var(--text2); }
+
+  .divider { border: none; border-top: 0.5px solid var(--border); margin: 1.5rem 0; }
+
+  /* WhatsApp */
+  .wa-outer { background: #ece5dd; border-radius: 12px; padding: 16px; margin-bottom: 1.75rem; }
+  .wa-topbar { background: #075e54; border-radius: 10px 10px 0 0; padding: 10px 14px; display: flex; align-items: center; gap: 10px; margin: -16px -16px 14px; }
+  .wa-av { width: 34px; height: 34px; border-radius: 50%; background: #128c7e; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 500; color: #fff; flex-shrink: 0; }
+  .wa-cn { font-size: 13px; font-weight: 500; color: #fff; }
+  .wa-cs { font-size: 11px; color: rgba(255,255,255,0.7); }
+  .wa-bubble { background: #fff; border-radius: 0 8px 8px 8px; padding: 12px 14px; max-width: 94%; }
+  .wa-txt { font-size: 13.5px; color: #1a1a1a; line-height: 1.6; }
+  .wa-time { font-size: 11px; color: #999; text-align: right; margin-top: 6px; }
+  .wa-hr { border: none; border-top: 1px solid #f0f0f0; margin: 10px 0; }
+  .wa-bm { display: flex; align-items: center; gap: 8px; padding: 3px 0; font-size: 13px; color: #1a1a1a; }
+  .wa-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+  .wa-dot.g { background: #25d366; }
+  .wa-dot.a { background: #f0c040; }
+  .wa-bm-val { font-weight: 600; }
+  .wa-bm-note { font-size: 11px; color: #888; margin-left: 2px; }
+  .wa-foot { font-size: 12px; color: #888; font-style: italic; margin-top: 8px; line-height: 1.5; }
+
+  .react-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 1.5rem; }
+  .react-btn { background: var(--bg); border: 0.5px solid var(--border); border-radius: var(--radius); padding: 12px 14px; font-size: 13px; color: var(--text2); cursor: pointer; text-align: left; font-family: var(--font); line-height: 1.4; transition: border-color 0.12s; }
+  .react-btn:hover { border-color: var(--border2); background: var(--bg2); }
+  .react-btn.sel { border: 1.5px solid var(--text); color: var(--text); background: var(--bg2); }
+
+  .name-input { width: 100%; border: 0.5px solid var(--border2); border-radius: var(--radius); padding: 14px 16px; font-size: 15px; font-family: var(--font); color: var(--text); background: var(--bg); margin-bottom: 1rem; }
+  .name-input:focus { outline: none; border-color: var(--text); }
+
+  .submitting { font-size: 14px; color: var(--text2); margin-top: 1rem; }
+  .error-msg { font-size: 13px; color: #c0392b; margin-top: 0.75rem; }
+
+  .screen { display: none; }
+  .screen.on { display: block; }
 </style>
 </head>
 <body>
-
-<!-- INTRO -->
-<div class="screen active" id="s-intro">
-  <div class="center">
-    <div class="brand">150 by YouLabs</div>
-    <div class="big-title">Help us understand how you like to receive health information</div>
-    <div class="sub">Two short sections — takes about 5 minutes. Your answers shape how we communicate with you during your 21-day journey.</div>
-    <div class="pill-row">
-      <span class="pill p1-pill">Part 1 — your communication style</span>
-      <span class="pill p2-pill">Part 2 — content that works for you</span>
-    </div>
-    <div class="time-pill">
-      <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><circle cx="6" cy="6" r="5" stroke="#0F6E56" stroke-width="1.2"/><path d="M6 3v3l2 1.5" stroke="#0F6E56" stroke-width="1.2" stroke-linecap="round"/></svg>
-      About 5 minutes
-    </div>
-    <button class="primary-btn" onclick="go('s-q1')">Start →</button>
-  </div>
-</div>
-
-<!-- PART 1 QUIZ -->
-<div class="screen" id="s-q1">
-  <div class="quiz-hd">
-    <div class="prog-row">
-      <div class="prog-track"><div class="prog-fill" id="p1-fill" style="width:0%"></div></div>
-      <div class="prog-lbl" id="p1-lbl">1 of 7</div>
-    </div>
-    <span class="part-badge pb1">Part 1 — your style</span>
-  </div>
-  <div class="quiz-body">
-    <div class="q-cat" id="q1-cat"></div>
-    <div class="q-txt" id="q1-txt"></div>
-    <div class="options" id="q1-opts"></div>
-    <button class="next-btn" id="q1-next" onclick="p1Next()">Next →</button>
-  </div>
-</div>
-
-<!-- TRANSITION -->
-<div class="screen" id="s-transition">
-  <div class="transition-wrap">
-    <div id="tr-badge" style="display:none"></div>
-    <div id="tr-title" style="display:none"></div>
-    <div id="tr-body" style="display:none"></div>
-    <div style="font-size:13px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;color:#0F6E56;margin-bottom:20px">Part 1 complete</div>
-    <div class="big-title" style="margin-bottom:16px">Now for the real test.</div>
-    <div class="sub" style="margin-bottom:32px">We'll show you 7 actual WhatsApp messages from the 150 content system. React to each one honestly — there are no right answers, just your instinct.</div>
-    <button class="primary-btn" onclick="go('s-q2')">See the messages →</button>
-  </div>
-</div>
-
-<!-- PART 2 -->
-<div class="screen" id="s-q2">
-  <div class="quiz-hd">
-    <div class="prog-row">
-      <div class="prog-track"><div class="prog-fill" id="p2-fill" style="width:0%"></div></div>
-      <div class="prog-lbl" id="p2-lbl">1 of 7</div>
-    </div>
-    <span class="part-badge pb2">Part 2 — content testing</span>
-  </div>
-  <div class="quiz-body" id="p2-body"></div>
-</div>
-
-<!-- RESULT -->
-<div class="screen" id="s-result">
-  <div class="result-wrap">
-    <div class="r-brand">150 by YouLabs</div>
-    <div class="persona-badge" id="r-badge"></div>
-    <div class="r-title" id="r-title"></div>
-    <div class="r-tagline" id="r-tagline"></div>
-    <div id="r-thankyou" style="margin-top:20px;padding:20px;background:#FFF;border:1px solid #E5E3DC;border-radius:14px;text-align:center"></div>
-    <div style="margin-top:20px;background:#FFF;border:1px solid #E5E3DC;border-radius:14px;padding:18px 20px">
-      <div style="font-size:13px;font-weight:500;color:#1A1A1A;margin-bottom:4px">One last thing</div>
-      <div style="font-size:12px;color:#5F5E5A;margin-bottom:12px">So we know whose responses these are.</div>
-      <input id="r-name" type="text" placeholder="Your name" style="width:100%;padding:10px 14px;border:1px solid #E5E3DC;border-radius:8px;font-size:14px;font-family:inherit;color:#1A1A1A;background:#F5F3EE;outline:none;margin-bottom:10px">
-      <button onclick="submitWithName()" style="width:100%;background:#1A1A1A;color:#F5F3EE;border:none;padding:12px;border-radius:50px;font-size:14px;font-weight:500;cursor:pointer;font-family:inherit">Submit my responses →</button>
-      <div id="r-submit-confirm" style="display:none;margin-top:10px;font-size:12px;color:#0F6E56;font-weight:500">Submitted. Thank you.</div>
-    </div>
-    <div style="margin-top:16px;font-size:12px;color:#B4B2A9;text-align:center;line-height:1.7;padding-bottom:8px">Your inputs will help shape how 150 communicates with you during your 21-day journey. Nothing here affects your clinical results.</div>
-    <div id="r-verdicts" style="display:none"></div>
-    <div id="r-scores" style="display:none"></div>
-    <div id="ot-section-lbl" style="display:none"></div>
-    <div id="r-open-texts" style="display:none"></div>
-    <div id="r-log" style="display:none"></div>
-    <button class="outline-btn" style="margin-top:8px;margin-bottom:28px" onclick="retake()">Retake from the beginning</button>
-  </div>
-</div>
+<div class="wrap" id="app"></div>
 
 <script>
-const P1Q = [
-  { cat:"How you take in information", txt:"When you get a new health report or test result, what do you do first?",
-    opts:[
-      {t:"I look at every number immediately and want to understand what each one means.",s:{d:3,sc:1,a:0}},
-      {t:"I scan for anything flagged or highlighted — I want to know if there's a problem.",s:{d:1,sc:0,a:2}},
-      {t:"I wait until someone I trust tells me what to make of it.",s:{d:0,sc:0,a:1}},
-      {t:"I look at the overall verdict first — how am I doing generally?",s:{d:1,sc:1,a:1}}
-    ]},
-  { cat:"How you take in information", txt:"You receive a long message explaining a health concept in detail. What happens?",
-    opts:[
-      {t:"I read every word — I find this kind of depth genuinely interesting.",s:{d:2,sc:3,a:0}},
-      {t:"I skim it for the key point and move on.",s:{d:1,sc:0,a:1}},
-      {t:"I save it to read later — but often don't get to it.",s:{d:0,sc:1,a:0}},
-      {t:"If it ends with something I can do, I read it. If not, I skip it.",s:{d:0,sc:0,a:3}}
-    ]},
-  { cat:"Your relationship with data", txt:"How do you feel when you see a clinical term you don't recognise — like 'HOMA-IR' or 'ApoB'?",
-    opts:[
-      {t:"Curious — I want to know what it means and I'll look it up if I have to.",s:{d:2,sc:3,a:0}},
-      {t:"Slightly annoyed — just tell me what it means for me.",s:{d:1,sc:0,a:2}},
-      {t:"Anxious — I worry it might be something bad.",s:{d:0,sc:0,a:1}},
-      {t:"Neutral — I trust the doctor to translate what matters.",s:{d:0,sc:1,a:1}}
-    ]},
-  { cat:"Your relationship with data", txt:"Which would you most want to receive while waiting for your full health report?",
-    opts:[
-      {t:"Early numbers — even if partial. I'd rather know something than nothing.",s:{d:3,sc:1,a:0}},
-      {t:"A short explanation of what the tests are actually measuring and why it matters.",s:{d:0,sc:3,a:0}},
-      {t:"One specific thing I can do right now that would help my results.",s:{d:0,sc:0,a:3}},
-      {t:"A reassurance that the process is on track and I'm in good hands.",s:{d:1,sc:0,a:1}}
-    ]},
-  { cat:"How you respond to health messages", txt:"A message arrives: 'Your liver markers have come through. There are a couple of things we'll address in the care plan.' How do you feel?",
-    opts:[
-      {t:"Immediately worried — what things? I need to know now.",s:{d:2,sc:1,a:0}},
-      {t:"Curious — I'd want to read more about what liver markers mean.",s:{d:1,sc:3,a:0}},
-      {t:"Fine — I trust the doctor to handle it. I'll wait for the full picture.",s:{d:0,sc:0,a:1}},
-      {t:"Focused — what's the plan and what do I need to do?",s:{d:0,sc:0,a:3}}
-    ]},
-  { cat:"How you respond to health messages", txt:"Which type of message would you most look forward to receiving from your 150 doctor?",
-    opts:[
-      {t:"A surprising fact about biology that most people don't know.",s:{d:1,sc:3,a:0}},
-      {t:"A status update showing which parts of my analysis are complete.",s:{d:2,sc:0,a:1}},
-      {t:"A single thing to try this week that's backed by my data.",s:{d:0,sc:0,a:3}},
-      {t:"A short voice note from the doctor — just checking in.",s:{d:0,sc:1,a:1}}
-    ]},
-  { cat:"Your health mindset", txt:"It's been 10 days since your blood draw. You haven't heard anything. How are you feeling?",
-    opts:[
-      {t:"Frustrated — I want regular updates even if there's nothing concrete to share.",s:{d:2,sc:1,a:1}},
-      {t:"Fine — good things take time. I trust the process.",s:{d:0,sc:1,a:0}},
-      {t:"Quietly anxious — I keep wondering if something concerning came up.",s:{d:1,sc:0,a:1}},
-      {t:"Using the time to focus on what I can control — sleep, movement, diet.",s:{d:0,sc:0,a:3}}
-    ]}
-];
+const SUBMIT_URL = "https://script.google.com/macros/s/AKfycbyT7O0SI7ISzTQ76BG8fpGY8Ta8OjfRPUI4M7SxlGUKrQFaXfQcHJ9aEAfg6zuKcF07/exec";
 
-const PERSONAS = {
-  analyst:{name:"The Analyst",badge:"Data-first",badgeBg:"#E1F5EE",badgeC:"#085041",accent:"#0F6E56",tagline:"You want the full picture — every number, every pattern, and the logic connecting them. Data without context is just noise to you.",scores:{trust:2,educate:3,engage:2}},
-  achiever:{name:"The Achiever",badge:"Performance-first",badgeBg:"#FAEEDA",badgeC:"#412402",accent:"#BA7517",tagline:"You treat health like performance — you want to know your score, benchmark it, and improve it. Science is only interesting if it tells you how to win.",scores:{trust:1,educate:1,engage:4}},
-  delegate:{name:"The Delegate",badge:"Trust-first",badgeBg:"#EEEDFE",badgeC:"#26215C",accent:"#534AB7",tagline:"You trust the right people to tell you what matters. You're not here to become a biologist — you're here for a result.",scores:{trust:5,educate:1,engage:1}},
-  curious:{name:"The Curious Mind",badge:"Science-first",badgeBg:"#EAF3DE",badgeC:"#173404",accent:"#3B6D11",tagline:"You want to understand your biology — not just monitor it. You're drawn to the science behind the data, the explanations that make surprising things make sense.",scores:{trust:1,educate:5,engage:1}}
+const DATA = {
+  brand: "150 by YouLabs",
+  heroTitle: "Help us understand how you like to receive health information",
+  heroSub: "Two short sections — takes about 5 minutes. Your answers shape how we communicate with you during your 21-day journey.",
+  part1Label: "Part 1 — your communication style",
+  part2Label: "Part 2 — content that works for you",
+  timeNote: "About 5 minutes",
+  part1Complete: "Part 1 complete",
+  part1CompleteBody: "Now for the real test. We'll show you 7 actual WhatsApp messages from the 150 content system. React to each one honestly — there are no right answers, just your instinct.",
+  namePrompt: "One last thing",
+  nameSubprompt: "So we know whose responses these are.",
+  successTitle: "Submitted. Thank you.",
+  successBody: "Your inputs will help shape how 150 communicates with you during your 21-day journey. Nothing here affects your clinical results.",
+
+  part1Questions: [
+    { q: "When you get health information, how much detail do you usually want?", options: ["Just the headline — give me the key number or finding", "A short summary with a bit of context", "I want to understand the reasoning behind it", "Full depth — the more detail, the better"] },
+    { q: "How do you feel about medical or scientific terms?", options: ["Keep it plain — avoid jargon entirely", "Brief jargon is fine if it's explained", "I'm comfortable with technical terms", "I prefer technical precision — it builds trust"] },
+    { q: "When something in a health update feels concerning, what do you usually want?", options: ["Acknowledge it simply, no drama", "Explain it clearly with context", "Tell me what action to take", "I want to understand the clinical significance"] },
+    { q: "How do you feel about receiving health nudges or recommendations?", options: ["Keep them rare — only when it really matters", "A few well-chosen ones are welcome", "I like regular gentle prompts", "Send me as many useful suggestions as possible"] },
+    { q: "What tone works best for you when receiving health information?", options: ["Clinical and neutral", "Warm but professional", "Conversational and human", "Like a trusted friend who happens to be a doctor"] },
+    { q: "When you receive updates during the 21-day wait, what matters most?", options: ["Knowing the process is on track", "Learning something new about my health", "Being kept engaged and involved", "Getting early signals about what my results might show"] },
+    { q: "How often would you like to hear from 150 during the 21-day journey?", options: ["Rarely — only for important milestones", "Every few days feels right", "Every other day is fine", "Daily updates would keep me engaged"] }
+  ],
+
+  part2Messages: [
+    { type: "standard", sender: "Dr. Surabbhi Menon", sub: "150 by YouLabs", text: "Your samples reached the lab safely and processing has begun. The next 21 days are a window — not a waiting room. We'll use this time well.", time: "9:04 AM", reactions: ["This feels reassuring", "Too vague for me", "Good — I like the framing", "Feels a bit formal"] },
+    { type: "standard", sender: "Dr. Surabbhi Menon", sub: "150 by YouLabs", text: "Quick vocab note: one of your panels includes a VO₂ max estimate. It's a measure of how efficiently your body uses oxygen during effort — one of the strongest predictors of long-term health. We'll explain your result in full when it's ready.", time: "10:30 AM", reactions: ["Useful — I like knowing in advance", "This feels like too much detail", "Good balance of info", "I'd rather wait and see everything at once"] },
+    { type: "standard", sender: "Dr. Surabbhi Menon", sub: "150 by YouLabs", text: "Something to reflect on before your results arrive: what's the one number you're most curious about? There's no wrong answer — just useful context for how we personalise your debrief.", time: "2:15 PM", reactions: ["I like being asked to reflect", "Feels unnecessary", "This builds anticipation well", "I find this a bit odd"] },
+    { type: "standard", sender: "Dr. Surabbhi Menon", sub: "150 by YouLabs", text: "Day 7 update: your metabolic panel is complete and has moved to clinical review. Inflammation markers are still processing — this batch takes a full 14 days. Everything is on schedule.", time: "9:00 AM", reactions: ["Exactly what I want", "Progress updates feel useful", "Too much process detail", "I'd prefer no updates until the end"] },
+    { type: "standard", sender: "Dr. Surabbhi Menon", sub: "150 by YouLabs", text: "One small action for today: notice how you feel at 3 PM — energy, focus, mood. It takes 10 seconds and adds context we can't get from a blood panel alone.", time: "11:00 AM", reactions: ["I'd actually do this", "Feels gimmicky to me", "Interesting — I like the idea", "Too much to ask mid-process"] },
+    { type: "standard", sender: "Dr. Surabbhi Menon", sub: "150 by YouLabs", text: "Your biological age estimate is being finalised. This is one of the more nuanced outputs in your report — it draws on multiple biomarkers, not just one. We'll walk you through the methodology when we reveal it.", time: "9:45 AM", reactions: ["Building anticipation well", "This is making me anxious", "Good — I want to understand the method", "Keep these kinds of teasers coming"] },
+    {
+      type: "data_reveal",
+      sender: "Dr. Surabbhi Menon", sub: "150 by YouLabs",
+      intro: "Hi [Name], your body scan results are in ✅",
+      biomarkers: [
+        { color: "g", label: "Muscle mass", value: "Healthy", note: "" },
+        { color: "a", label: "Visceral fat", value: "Level 9", note: "(optimal <8)" }
+      ],
+      commentary: "Good foundation. The visceral fat is one area we'll work on — it's a key lever for how your body ages.",
+      footer: "Full report on its way. I'll message you when it's ready.",
+      time: "10:30 AM",
+      reactions: ["This is exactly what I want early", "I'd rather wait for the full report", "The colour coding makes it easy to read", "This makes me anxious before the full context"],
+      followupQ: "You see the visceral fat result is amber. What would you do next?",
+      followupSub: "Pick the one that feels most true to you.",
+      followupOptions: ["Wait for the full report — I'd rather not act on partial data", "Reply to the message asking what it means", "Search online to understand visceral fat better", "Call the 150 team for an immediate explanation", "Feel reassured enough by the commentary and move on"]
+    },
+    { type: "standard", sender: "Dr. Surabbhi Menon", sub: "150 by YouLabs", text: "Your report is ready. Dr. Menon will walk you through it in your scheduled call. A few things to know before you open it: your results will include ranges, context, and recommended next steps. Nothing in this report is a diagnosis.", time: "8:00 AM", reactions: ["Perfect — sets the right expectation", "I'd want to open it immediately", "Reassuring framing", "The disclaimer feels a bit clinical"] }
+  ]
 };
 
-const MESSAGES = [
-  { id:"tracker", bucket:"trust", concept:"The Tracker", day:"Day 7",
-    fq_love:["Reassuring — I could see something was happening","The visual progress made it feel real","Confirmed the process was running on schedule","Simple enough to not overwhelm me"],
-    fq_ok:["Good idea but I'd want more detail on what's complete","The visual wasn't clear enough","Felt a bit too simple for the wait"],
-    fq_no:["Felt like a holding message — not enough substance","I'd rather just get the actual data","Too vague to feel useful","Didn't reduce my anxiety about waiting"],
-    render: () => `
-      <div class="wa-screen">
-        <div class="wa-top"><div class="wa-av">150</div><div><div class="wa-name">150 by YouLabs</div><div class="wa-sub">online</div></div></div>
-        <div class="tracker-card">
-          <div class="tc-title">Your Q1 picture — week 1</div>
-          <div class="pillars">
-            <div class="pillar p-done">✓ Metabolic</div>
-            <div class="pillar p-proc">⟳ Cardio</div>
-            <div class="pillar p-pend">◌ Cellular</div>
-          </div>
-        </div>
-        <div class="wa-bubble">Your metabolic data has come through. One pillar complete — two still processing.<div class="wa-time">9:14 am ✓✓</div></div>
-      </div>`
-  },
-  { id:"process", bucket:"trust", concept:"The Process Window", day:"Day 4",
-    fq_love:["Made the wait feel purposeful, not empty","Showed the science was real and rigorous","The precision detail was reassuring","Made me feel my sample was being taken seriously"],
-    fq_ok:["Good intention but slightly clinical in tone","I'd want to know when to expect results","Interesting but I wasn't sure what to do with it"],
-    fq_no:["I don't need to know this — just tell me the results","Felt like filler content to me","Too much detail about process, not enough about me"],
-    render: () => `
-      <div class="wa-screen">
-        <div class="wa-top"><div class="wa-av">150</div><div><div class="wa-name">150 by YouLabs</div><div class="wa-sub">online</div></div></div>
-        <div class="wa-bubble"><b>Your sample is in the lab.</b>The 14 tubes drawn Monday are now being processed. This week: your metabolic panel, lipid fractions, and inflammatory markers — each run to precision thresholds most standard labs don't use.<br><br>Your data is in good hands.<div class="wa-time">9:00 am ✓✓</div></div>
-      </div>`
-  },
-  { id:"doctor_signal", bucket:"trust", concept:"The Doctor Signal", day:"Day 15",
-    fq_love:["The voice made it feel genuinely personal","Hearing the doctor directly built real trust","Made the wait feel less like a black box","Short and warm — exactly the right register"],
-    fq_ok:["Nice idea — but curious what was actually said","Voice notes feel unusual in this context","Would prefer a text message personally"],
-    fq_no:["I don't listen to voice notes on WhatsApp","Feels too informal for a health service","I'd rather have text I can re-read"],
-    render: () => `
-      <div class="wa-screen">
-        <div class="wa-top"><div class="wa-av">Dr</div><div><div class="wa-name">Dr. Mehra</div><div class="wa-sub">150 by YouLabs</div></div></div>
-        <div class="wa-bubble"><b>A note while your data comes together</b>
-          <div class="wa-voice">
-            <div class="wa-play"><svg width="10" height="10" viewBox="0 0 10 10" fill="#0F6E56"><path d="M2 1.5l7 3.5-7 3.5z"/></svg></div>
-            <div class="wa-wave"><div class="wa-bar" style="height:5px"></div><div class="wa-bar" style="height:9px"></div><div class="wa-bar" style="height:13px"></div><div class="wa-bar" style="height:7px"></div><div class="wa-bar" style="height:14px"></div><div class="wa-bar" style="height:9px"></div><div class="wa-bar" style="height:5px"></div><div class="wa-bar" style="height:11px"></div><div class="wa-bar" style="height:16px"></div><div class="wa-bar" style="height:7px"></div><div class="wa-bar" style="height:12px"></div><div class="wa-bar" style="height:5px"></div></div>
-            <div class="wa-dur">1:22</div>
-          </div>
-          <div class="wa-time">8:47 am ✓✓</div>
-        </div>
-      </div>`
-  },
-  { id:"reframe", bucket:"educate", concept:"The Reframe", day:"Day 9",
-    fq_love:["Genuinely didn't know this — changed how I think","Short and surprising — exactly what I'd share","Made me feel I was getting insider knowledge","Justified why 150 is different from a standard check"],
-    fq_ok:["Interesting but not sure what to do with it","I knew this already","Good concept — the execution could be sharper"],
-    fq_no:["Not what I want from a health service — just give me my data","Feels like content marketing, not medical communication","Too clever — I want something more direct"],
-    render: () => `
-      <div class="wa-screen">
-        <div class="wa-top"><div class="wa-av">150</div><div><div class="wa-name">150 by YouLabs</div><div class="wa-sub">online</div></div></div>
-        <div class="wa-bubble"><b>Something that surprises most people</b>Total cholesterol — the number most doctors report — is one of the weakest predictors of cardiovascular risk we have.<br><br>ApoB, the particle that carries cholesterol into artery walls, predicts it far more accurately. Most standard checks don't measure it.<br><br>Yours does.<div class="wa-time">8:30 am ✓✓</div></div>
-      </div>`
-  },
-  { id:"indian_body", bucket:"educate", concept:"The Indian Body", day:"Day 13",
-    fq_love:["Finally — content that actually applies to me","This is exactly the kind of insight I didn't know I needed","Made me feel seen as an Indian patient, not just a generic one","Justified the premium — this is bespoke"],
-    fq_ok:["Interesting but I'd want more detail on what it means for my results","Good to know — though slightly dense","Would work better with a visual"],
-    fq_no:["Felt a bit preachy","I'm already aware of South Asian health differences","Not what I want during the wait — leave this for the report"],
-    render: () => `
-      <div class="wa-screen">
-        <div class="wa-top"><div class="wa-av" style="background:#EAF3DE;color:#173404">150</div><div><div class="wa-name">150 by YouLabs</div><div class="wa-sub">online</div></div></div>
-        <div class="wa-bubble">
-          <div class="wa-tag" style="background:#EAF3DE;color:#173404">India-specific insight</div>
-          <b>Something your standard health check doesn't account for</b>South Asians develop insulin resistance at lower BMI thresholds than Western populations — and at younger ages. A fasting glucose of 95 mg/dL that a Western reference range calls "normal" may indicate early metabolic stress in an Indian body.<br><br>Your report uses thresholds calibrated for South Asian physiology. Most don't.<div class="wa-time">8:45 am ✓✓</div>
-        </div>
-      </div>`
-  },
-  { id:"reflection", bucket:"engage", concept:"Reflection Prompt", day:"Day 12",
-    fq_love:["Made me actually think — in a good way","Felt very human, not clinical","The 'no need to reply' framing was the right call","Arrived at exactly the right moment"],
-    fq_ok:["Nice but a bit too philosophical for me","I read it but it didn't stay with me","Good idea — but this particular question didn't land"],
-    fq_no:["Too philosophical — not for me","I want information, not a question","Wrong timing — I'm anxious about results, not reflective","Felt more like a lifestyle app than a health service"],
-    render: () => `
-      <div class="wa-screen">
-        <div class="wa-top"><div class="wa-av" style="background:#FAEEDA;color:#412402">150</div><div><div class="wa-name">150 by YouLabs</div><div class="wa-sub">online</div></div></div>
-        <div class="wa-bubble"><b>A question to sit with</b>If you had 10 more years of the energy and clarity you had at your peak — what would you do differently with them?<br><br><span style="font-size:11px;color:#B4B2A9">No need to reply. Just something to carry into your results.</span><div class="wa-time">7:58 am ✓✓</div></div>
-      </div>`
-  },
-  { id:"nudge", bucket:"engage", concept:"Behavioural Nudge", day:"Day 16",
-    fq_love:["Specific enough to actually do — I tried it","Felt like the doctor was in my corner","Short, direct, and immediately useful","The 'your report will tell you this matters' line was clever"],
-    fq_ok:["Good idea — but I already do this","Right intention, slightly generic execution","I'd want it to be personalised to my data, not universal"],
-    fq_no:["Feels like standard wellness advice, not 150-level","Too generic — I pay for personalisation","I don't want to be told what to do before I've even seen my results"],
-    render: () => `
-      <div class="wa-screen">
-        <div class="wa-top"><div class="wa-av" style="background:#FAEEDA;color:#412402">150</div><div><div class="wa-name">150 by YouLabs</div><div class="wa-sub">online</div></div></div>
-        <div class="wa-bubble"><b>One thing. This week.</b>For the next 5 days — 500ml of water within 20 minutes of waking. Before coffee. Before your phone.<br><br>Small thing. But it's the kind of thing your report will tell you matters more than it sounds.<div class="wa-time">7:30 am ✓✓</div></div>
-      </div>`
-  }
-];
+let part = "intro";
+let p1i = 0, p2i = 0, p2stage = "reaction";
+let p1ans = Array(7).fill(null);
+let p2ans = Array(8).fill(null);
+let p2fu = {};
+let respName = "";
+const app = document.getElementById("app");
 
-const BUCKET_BREAKS = {
-  trust:{ label:"Trust builders — your feedback", title:"You've just seen 3 trust-building messages.", sub:"These are designed to make the 21-day wait feel purposeful rather than empty. Anything you'd want to tell us — what's missing, what felt off, or what you'd love to see more of in this format?" },
-  educate:{ label:"Education — your feedback", title:"You've just seen 2 education-style messages.", sub:"These are designed to give you vocabulary to receive the report when it arrives. What's working, what feels off, or what kind of education would actually be useful to you?" },
-  engage:{ label:"Engagement — your feedback", title:"You've just seen 2 engagement messages.", sub:"These are designed to keep you active and invested during the wait. What landed, what didn't, or what kind of engagement would feel right coming from a health service?" }
-};
-
-let p1Q=0, p1Sel=null, p1Scores={d:0,sc:0,a:0};
-let persona=null;
-let p2Idx=0, p2Reactions={}, p2FQ={}, p2OpenTexts={trust:'',educate:'',engage:''};
-let currentBucket=null, bucketsDone=[];
-const BUCKET_ORDER=['trust','educate','engage'];
-
-function go(id){ document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active')); document.getElementById(id).classList.add('active'); window.scrollTo(0,0); }
-
-function p1Render(){
-  const q=P1Q[p1Q]; p1Sel=null;
-  document.getElementById('q1-cat').textContent=q.cat;
-  document.getElementById('q1-txt').textContent=q.txt;
-  document.getElementById('p1-fill').style.width=((p1Q/7)*100)+'%';
-  document.getElementById('p1-lbl').textContent=(p1Q+1)+' of 7';
-  const wrap=document.getElementById('q1-opts'); wrap.innerHTML='';
-  const L=['A','B','C','D'];
-  q.opts.forEach((o,i)=>{
-    const d=document.createElement('div'); d.className='opt';
-    d.innerHTML=`<div class="opt-lt">${L[i]}</div><div class="opt-tx">${o.t}</div>`;
-    d.onclick=()=>{ p1Sel=i; wrap.querySelectorAll('.opt').forEach((el,j)=>el.classList.toggle('sel',j===i)); document.getElementById('q1-next').classList.add('on'); };
-    wrap.appendChild(d);
-  });
-  const btn=document.getElementById('q1-next');
-  btn.classList.remove('on');
-  btn.textContent=p1Q<6?'Next →':'See my results →';
+function r() {
+  if (part === "intro") rIntro();
+  else if (part === "p1") rP1();
+  else if (part === "p1done") rP1Done();
+  else if (part === "p2") rP2();
+  else if (part === "name") rName();
+  else if (part === "done") rDone();
 }
 
-function p1Next(){
-  if(p1Sel===null) return;
-  const s=P1Q[p1Q].opts[p1Sel].s;
-  p1Scores.d+=s.d; p1Scores.sc+=s.sc; p1Scores.a+=s.a;
-  p1Q++;
-  if(p1Q>=7){ p1Finish(); } else { p1Render(); }
-}
-
-function p1Finish(){
-  const {d,sc,a}=p1Scores;
-  const mx=Math.max(d,sc,a);
-  const tot=d+sc+a;
-  if(tot<10 && a<=5 && a>=d && a>=sc) persona=PERSONAS.delegate;
-  else if(mx===d) persona=PERSONAS.analyst;
-  else if(mx===sc) persona=PERSONAS.curious;
-  else persona=PERSONAS.achiever;
-  const tb=document.getElementById('tr-badge');
-  tb.textContent=persona.badge; tb.style.background=persona.badgeBg; tb.style.color=persona.badgeC;
-  document.getElementById('tr-title').textContent=persona.name;
-  document.getElementById('tr-body').textContent=persona.tagline;
-  go('s-transition');
-}
-
-function p2Render(){
-  const body=document.getElementById('p2-body');
-  document.getElementById('p2-fill').style.width=((p2Idx/MESSAGES.length)*100)+'%';
-  document.getElementById('p2-lbl').textContent=(p2Idx+1)+' of '+MESSAGES.length;
-  const msg=MESSAGES[p2Idx];
-  const reaction=p2Reactions[msg.id]||null;
-  const fqSel=p2FQ[msg.id]!==undefined?p2FQ[msg.id]:null;
-  const showFQ=reaction!==null;
-  const fqOpts=reaction==='love'?msg.fq_love:reaction==='ok'?msg.fq_ok:msg.fq_no;
-  const fqLabel=reaction==='love'?'What made it work for you?':reaction==='ok'?'What would make it better?':'What felt off?';
-  const canNext=reaction!==null&&fqSel!==null;
-  const isLast=p2Idx===MESSAGES.length-1;
-  const bucketEnds=p2Idx===2||p2Idx===4||p2Idx===6;
-  body.innerHTML=`
-    ${msg.render()}
-    <div class="react-label">How did this land for you?</div>
-    <div class="react-row">
-      <button class="r-btn ${reaction==='love'?'r-love':''}" onclick="p2React('love')">
-        <svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M6.5 11S1 7.5 1 4.5a2.5 2.5 0 015 0h1a2.5 2.5 0 015 0C12 7.5 6.5 11 6.5 11z" stroke="currentColor" stroke-width="1.2" fill="${reaction==='love'?'#0F6E56':'none'}"/></svg>
-        This works for me
-      </button>
-      <button class="r-btn ${reaction==='ok'?'r-ok':''}" onclick="p2React('ok')">
-        <svg width="13" height="13" viewBox="0 0 13 13" fill="none"><circle cx="6.5" cy="6.5" r="5.5" stroke="currentColor" stroke-width="1.2"/><path d="M4 8s.8 1 2.5 1S9 8 9 8" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
-        It's okay
-      </button>
-      <button class="r-btn ${reaction==='no'?'r-no':''}" onclick="p2React('no')">
-        <svg width="13" height="13" viewBox="0 0 13 13" fill="none"><circle cx="6.5" cy="6.5" r="5.5" stroke="currentColor" stroke-width="1.2"/><path d="M4 9s.8-1 2.5-1S9 9 9 9" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
-        Not for me
-      </button>
+function rIntro() {
+  app.innerHTML = `
+    <p class="brand">${DATA.brand}</p>
+    <h1 class="hero-title">${DATA.heroTitle}</h1>
+    <p class="hero-sub">${DATA.heroSub}</p>
+    <div class="parts-row">
+      <div class="part-badge">${DATA.part1Label}</div>
+      <div class="part-badge">${DATA.part2Label}</div>
     </div>
-    ${showFQ?`
-      <div class="fq-label">${fqLabel}</div>
-      <div class="fq-opts">
-        ${fqOpts.map((o,i)=>`<button class="fq-opt ${fqSel===i?'sel':''}" onclick="p2FQSel(${i})">${o}</button>`).join('')}
-      </div>
-    `:''}
-    <button class="next-btn ${canNext?'on':''}" onclick="p2Next()">${isLast?'See my full results →':'Next message →'}</button>
-  `;
+    <p class="time-note">${DATA.timeNote}</p>
+    <button class="btn-primary" onclick="go('p1')">Start →</button>`;
 }
 
-function p2React(r){
-  const msg=MESSAGES[p2Idx];
-  p2Reactions[msg.id]=r;
-  p2FQ[msg.id]=null;
-  p2Render();
-}
-
-function p2FQSel(i){
-  const msg=MESSAGES[p2Idx];
-  p2FQ[msg.id]=i;
-  p2Render();
-}
-
-function p2Next(){
-  const msg=MESSAGES[p2Idx];
-  if(!p2Reactions[msg.id]||p2FQ[msg.id]===undefined||p2FQ[msg.id]===null) return;
-  const bucketNow=msg.bucket;
-  const nextMsg=MESSAGES[p2Idx+1];
-  const bucketChanges=nextMsg&&nextMsg.bucket!==bucketNow;
-  const isLast=p2Idx===MESSAGES.length-1;
-  if(bucketChanges&&!bucketsDone.includes(bucketNow)){
-    showBucketBreak(bucketNow);
-  } else if(isLast&&!bucketsDone.includes(bucketNow)){
-    showBucketBreak(bucketNow,true);
-  } else {
-    p2Idx++;
-    if(p2Idx>=MESSAGES.length){ buildResult(); go('s-result'); }
-    else p2Render();
-  }
-}
-
-function showBucketBreak(bucket,isLast=false){
-  bucketsDone.push(bucket);
-  const bb=BUCKET_BREAKS[bucket];
-  const body=document.getElementById('p2-body');
-  body.innerHTML=`
-    <div class="bucket-break">
-      <div class="bb-label">${bb.label}</div>
-      <div class="bb-title">${bb.title}</div>
-      <div class="bb-sub">${bb.sub}</div>
-      <textarea class="bb-ta" id="bb-ta-${bucket}" placeholder="Optional — skip if nothing comes to mind…" oninput="p2OpenTexts['${bucket}']=this.value"></textarea>
-      <div class="bb-foot">
-        <button class="skip-lnk" onclick="bbNext('${bucket}',${isLast})">Skip this</button>
-        <button class="sm-btn" onclick="bbNext('${bucket}',${isLast})">${isLast?'See my results →':'Next section →'}</button>
-      </div>
+function rP1() {
+  const q = DATA.part1Questions[p1i];
+  app.innerHTML = `
+    <div class="progress-wrap"><div class="progress-fill" style="width:${p1i/7*100}%"></div></div>
+    <p class="q-label">${DATA.part1Label}</p>
+    <p class="q-text">${q.q}</p>
+    <div class="opt-list">
+      ${q.options.map((o,i)=>`<button class="opt-btn${p1ans[p1i]===i?' sel':''}" onclick="sp1(${i})">${o}</button>`).join("")}
     </div>
-  `;
-  window.scrollTo(0,0);
-}
-
-function bbNext(bucket,isLast){
-  const ta=document.getElementById('bb-ta-'+bucket);
-  if(ta) p2OpenTexts[bucket]=ta.value.trim();
-  if(isLast){ buildResult(); go('s-result'); }
-  else { p2Idx++; if(p2Idx>=MESSAGES.length){ buildResult(); go('s-result'); } else p2Render(); }
-}
-
-function buildResult(){
-  const rb=document.getElementById('r-badge');
-  rb.textContent=persona.badge; rb.style.background=persona.badgeBg; rb.style.color=persona.badgeC;
-  document.getElementById('r-title').textContent=persona.name;
-  document.getElementById('r-tagline').textContent=persona.tagline;
-  const tyEl=document.getElementById('r-thankyou');
-  tyEl.innerHTML=`<div style="font-size:13px;color:#5F5E5A;line-height:1.75">Thank you for taking the time. This goes straight into how we build for you.</div>`;
-  const vd=document.getElementById('r-verdicts'); vd.innerHTML='';
-  const emojiMap={love:'♥',ok:'〜',no:'✕'};
-  const verdictMap={};
-  MESSAGES.forEach(m=>{
-    const r=p2Reactions[m.id]||'—';
-    const ri=p2FQ[m.id];
-    const fqOpts=r==='love'?m.fq_love:r==='ok'?m.fq_ok:m.fq_no;
-    const fqText=ri!==null&&ri!==undefined?fqOpts[ri]:'';
-    let verdict='evolve', vClass='v-evolve', vLabel='Evolve';
-    if(r==='love'){ verdict='keep'; vClass='v-keep'; vLabel='Keep as is'; }
-    else if(r==='no'){ verdict='drop'; vClass='v-drop'; vLabel='Needs rethink'; }
-    verdictMap[m.id]=verdict;
-    const bucketColors={trust:{bg:'#E1F5EE',c:'#085041'},educate:{bg:'#EAF3DE',c:'#173404'},engage:{bg:'#FAEEDA',c:'#412402'}};
-    const bc=bucketColors[m.bucket];
-    vd.innerHTML+=`<div class="insight-card">
-      <div class="ic-top">
-        <div class="ic-icon" style="background:${bc.bg};color:${bc.c};font-size:11px;font-weight:600">${m.concept.slice(0,3).toUpperCase()}</div>
-        <div style="flex:1"><div class="ic-name">${m.concept}</div><div style="font-size:10px;color:#888780">Day ${m.day.replace('Day ','')}</div></div>
-        <span class="ic-verdict ${vClass}">${vLabel}</span>
-      </div>
-      ${fqText?`<div class="ic-body">"${fqText}"</div>`:''}
+    <div class="nav-row">
+      <button class="btn-ghost" onclick="backP1()" style="${p1i===0?'visibility:hidden':''}">← Back</button>
+      <span class="step-ct">${p1i+1} of 7</span>
+      <button class="btn-primary" onclick="nextP1()" ${p1ans[p1i]===null?'disabled':''}>Next →</button>
     </div>`;
-  });
-  const sc=document.getElementById('r-scores');
-  const sData=persona.scores;
-  const bNames=['Trust builders','Education','Engagement'];
-  const bVals=[sData.trust,sData.educate,sData.engage];
-  const bColors=[persona.accent,persona.accent,persona.accent];
-  sc.innerHTML=bNames.map((n,i)=>`<div class="sc"><div class="sc-val" style="color:${bColors[i]}">${'&#9679;'.repeat(bVals[i])}${'&#9675;'.repeat(5-bVals[i])}</div><div class="sc-lbl">${n}</div></div>`).join('');
-  const otWrap=document.getElementById('r-open-texts'); otWrap.innerHTML='';
-  const otLbl=document.getElementById('ot-section-lbl');
-  const hasOT=Object.values(p2OpenTexts).some(v=>v.trim().length>0);
-  if(hasOT){
-    otLbl.style.display='block';
-    const bucketLabels={trust:'Trust builders',educate:'Education',engage:'Engagement'};
-    const bucketAccents={trust:'#0F6E56',educate:'#3B6D11',engage:'#BA7517'};
-    Object.entries(p2OpenTexts).forEach(([k,v])=>{
-      if(v.trim()){
-        otWrap.innerHTML+=`<div class="open-text-section"><div class="ot-bucket" style="color:${bucketAccents[k]}">${bucketLabels[k]}</div><div class="ot-text">"${v.trim()}"</div></div>`;
-      }
+}
+
+function rP1Done() {
+  app.innerHTML = `
+    <div class="check-circle">✓</div>
+    <p class="brand">${DATA.brand}</p>
+    <h1 class="hero-title">${DATA.part1Complete}</h1>
+    <p class="hero-sub">${DATA.part1CompleteBody}</p>
+    <button class="btn-primary" onclick="go('p2')">See the messages →</button>`;
+}
+
+function rP2() {
+  const m = DATA.part2Messages[p2i];
+  const pct = p2i / 8 * 100;
+  const isRev = m.type === "data_reveal";
+  const showFU = isRev && p2stage === "followup";
+
+  const bubble = isRev ? `
+    <div class="wa-outer">
+      <div class="wa-topbar"><div class="wa-av">DS</div><div><div class="wa-cn">${m.sender}</div><div class="wa-cs">${m.sub}</div></div></div>
+      <div class="wa-bubble">
+        <div class="wa-txt" style="margin-bottom:10px">${m.intro}</div>
+        <hr class="wa-hr">
+        ${m.biomarkers.map(b=>`<div class="wa-bm"><div class="wa-dot ${b.color}"></div><span style="flex:1">${b.label}</span><span class="wa-bm-val">${b.value}</span>${b.note?`<span class="wa-bm-note">${b.note}</span>`:""}</div>`).join("")}
+        <hr class="wa-hr">
+        <div class="wa-txt" style="margin-bottom:6px">${m.commentary}</div>
+        <div class="wa-foot">${m.footer}</div>
+        <div class="wa-time">${m.time} ✓✓</div>
+      </div>
+    </div>` : `
+    <div class="wa-outer">
+      <div class="wa-topbar"><div class="wa-av">DS</div><div><div class="wa-cn">${m.sender}</div><div class="wa-cs">${m.sub}</div></div></div>
+      <div class="wa-bubble"><div class="wa-txt">${m.text}</div><div class="wa-time">${m.time} ✓✓</div></div>
+    </div>`;
+
+  const body = showFU ? `
+    <p class="q-text" style="font-size:16px;margin-bottom:.75rem">${m.followupQ}</p>
+    <p style="font-size:13px;color:var(--text2);margin-bottom:1rem">${m.followupSub}</p>
+    <div class="opt-list">
+      ${m.followupOptions.map((o,i)=>`<button class="opt-btn${p2fu[p2i]===i?' sel':''}" onclick="sfu(${i})">${o}</button>`).join("")}
+    </div>` : `
+    <p class="q-text" style="font-size:15px;margin-bottom:1rem">How does this message land for you?</p>
+    <div class="react-grid">
+      ${m.reactions.map((r,i)=>`<button class="react-btn${p2ans[p2i]===i?' sel':''}" onclick="sp2(${i})">${r}</button>`).join("")}
+    </div>`;
+
+  const canNext = isRev
+    ? (p2stage === "reaction" ? p2ans[p2i]!==null : p2fu[p2i]!==undefined)
+    : p2ans[p2i]!==null;
+
+  app.innerHTML = `
+    <div class="progress-wrap"><div class="progress-fill" style="width:${pct}%"></div></div>
+    <p class="q-label">${DATA.part2Label}</p>
+    ${bubble}
+    ${body}
+    <div class="nav-row">
+      <button class="btn-ghost" onclick="backP2()" style="${p2i===0&&p2stage==='reaction'?'visibility:hidden':''}">← Back</button>
+      <span class="step-ct">${p2i+1} of 8</span>
+      <button class="btn-primary" onclick="nextP2()" ${!canNext?'disabled':''}>Next →</button>
+    </div>`;
+}
+
+function rName() {
+  app.innerHTML = `
+    <p class="brand">${DATA.brand}</p>
+    <h1 class="hero-title">${DATA.namePrompt}</h1>
+    <p class="hero-sub" style="margin-bottom:1.5rem">${DATA.nameSubprompt}</p>
+    <input class="name-input" type="text" placeholder="Your name" id="nf" value="${respName}" />
+    <br>
+    <button class="btn-primary" id="subBtn" onclick="submit()" ${!respName?'disabled':''}>Submit my responses →</button>
+    <div id="submitting" class="submitting" style="display:none">Submitting...</div>
+    <div id="errMsg" class="error-msg" style="display:none"></div>`;
+  document.getElementById("nf").addEventListener("input", function(){ respName = this.value; document.getElementById("subBtn").disabled = !respName; });
+}
+
+function rDone() {
+  app.innerHTML = `
+    <div class="check-circle">✓</div>
+    <h1 class="hero-title">${DATA.successTitle}</h1>
+    <p class="hero-sub">${DATA.successBody}</p>
+    <hr class="divider">
+    <button class="btn-ghost" onclick="restart()">Retake from the beginning</button>`;
+}
+
+function go(p) { part = p; if(p==="p2"){p2i=0;p2stage="reaction";} r(); }
+function sp1(i) { p1ans[p1i]=i; r(); }
+function sp2(i) { p2ans[p2i]=i; r(); }
+function sfu(i) { p2fu[p2i]=i; r(); }
+function backP1() { if(p1i>0){p1i--;r();} }
+function nextP1() { if(p1ans[p1i]===null)return; if(p1i<6){p1i++;r();}else{part="p1done";r();} }
+function backP2() {
+  const m = DATA.part2Messages[p2i];
+  if(m.type==="data_reveal"&&p2stage==="followup"){p2stage="reaction";r();return;}
+  if(p2i>0){p2i--;p2stage="reaction";r();}else{part="p1done";r();}
+}
+function nextP2() {
+  const m = DATA.part2Messages[p2i];
+  if(m.type==="data_reveal"){
+    if(p2stage==="reaction"){if(p2ans[p2i]===null)return;p2stage="followup";r();return;}
+    else{if(p2fu[p2i]===undefined)return;}
+  } else { if(p2ans[p2i]===null)return; }
+  if(p2i<7){p2i++;p2stage="reaction";r();}else{part="name";r();}
+}
+function restart() { p1ans=Array(7).fill(null);p2ans=Array(8).fill(null);p2fu={};respName="";part="intro";r(); }
+
+async function submit() {
+  if(!respName) return;
+  document.getElementById("subBtn").disabled = true;
+  document.getElementById("submitting").style.display = "block";
+  document.getElementById("errMsg").style.display = "none";
+
+  const payload = { name: respName, p1: p1ans, p2: p2ans, p2followup: p2fu };
+
+  try {
+    await fetch(SUBMIT_URL, {
+      method: "POST",
+      mode: "no-cors",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload)
     });
+    part = "done";
+    r();
+  } catch(err) {
+    document.getElementById("submitting").style.display = "none";
+    document.getElementById("subBtn").disabled = false;
+    document.getElementById("errMsg").style.display = "block";
+    document.getElementById("errMsg").textContent = "Something went wrong — please try again. (" + err.message + ")";
   }
-  buildLog();
 }
 
-function buildLog(){
-  const lines=[];
-  lines.push('150 BY YOULABS — QUIZ RESPONSE LOG');
-  lines.push('─────────────────────────────────────');
-  lines.push(`Persona: ${persona.name} (${persona.badge})`);
-  lines.push(`Part 1 scores — Data: ${p1Scores.d} | Science: ${p1Scores.sc} | Action: ${p1Scores.a}`);
-  lines.push('');
-  lines.push('PART 2 — CONTENT REACTIONS');
-  lines.push('─────────────────────────────────────');
-  const rMap={love:'✓ Works for me',ok:'~ It\'s okay',no:'✕ Not for me'};
-  MESSAGES.forEach(m=>{
-    const r=p2Reactions[m.id]||'—';
-    const ri=p2FQ[m.id];
-    const fqOpts=r==='love'?m.fq_love:r==='ok'?m.fq_ok:m.fq_no;
-    const fqText=ri!==null&&ri!==undefined?fqOpts[ri]:'—';
-    lines.push(`${m.concept} [${m.bucket}]`);
-    lines.push(`  Reaction: ${rMap[r]||r}`);
-    lines.push(`  Follow-up: ${fqText}`);
-    lines.push('');
-  });
-  lines.push('OPEN TEXT FEEDBACK');
-  lines.push('─────────────────────────────────────');
-  const bLabels={trust:'Trust builders',educate:'Education',engage:'Engagement'};
-  Object.entries(p2OpenTexts).forEach(([k,v])=>{
-    lines.push(`${bLabels[k]}: ${v.trim()||'(skipped)'}`);
-  });
-  const logText=lines.join('\n');
-  document.getElementById('r-log').textContent=logText;
-}
-
-function submitWithName(){
-  const name=document.getElementById('r-name').value.trim();
-  const log=document.getElementById('r-log').textContent;
-  const fullLog='Name: '+(name||'(not provided)')+'\n\n'+log;
-  submitToGoogle(fullLog);
-  const btn=document.querySelector('[onclick="submitWithName()"]');
-  if(btn){ btn.style.opacity='0.4'; btn.style.pointerEvents='none'; }
-  document.getElementById('r-submit-confirm').style.display='block';
-}
-
-function submitToGoogle(logText){
-  try{
-    const formUrl='https://docs.google.com/forms/d/e/1FAIpQLSc2DqahZ2z3tuPD7o09_GcFzaRZFs7HKZ1thMcUUixBnFiHfA/formResponse';
-    const data=new FormData();
-    data.append('entry.1750355383', logText);
-    fetch(formUrl,{method:'POST',body:data,mode:'no-cors'}).catch(()=>{});
-  } catch(e){}
-}
-
-function copyLog(){
-  const txt=document.getElementById('r-log').textContent;
-  navigator.clipboard.writeText(txt).then(()=>{
-    const lbl=document.getElementById('copy-lbl');
-    lbl.textContent='Copied ✓';
-    setTimeout(()=>lbl.textContent='Copy full log',2000);
-  });
-}
-
-function retake(){
-  p1Q=0; p1Sel=null; p1Scores={d:0,sc:0,a:0};
-  persona=null; p2Idx=0; p2Reactions={}; p2FQ={};
-  p2OpenTexts={trust:'',educate:'',engage:''};
-  bucketsDone=[];
-  p1Render();
-  go('s-intro');
-}
-
-p1Render();
-
-document.getElementById('s-q2').addEventListener('animationend',()=>{});
-document.querySelector('#s-q2 .quiz-body') && (()=>{})();
-
-window.addEventListener('DOMContentLoaded',()=>{
-  document.getElementById('s-q2').addEventListener('click',()=>{});
-});
-
-const origGo=go;
-window.go=function(id){
-  origGo(id);
-  if(id==='s-q2') p2Render();
-};
+r();
 </script>
 </body>
 </html>
