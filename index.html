@@ -115,12 +115,12 @@ const SUBMIT_URL = "https://script.google.com/macros/s/AKfycbyT7O0SI7ISzTQ76BG8f
 const DATA = {
   brand: "150 by YouLabs",
   heroTitle: "Help us understand how you like to receive health information",
-  heroSub: "Two short sections — takes about 5 minutes. Your answers shape how we communicate with you during your 21-day journey.",
+  heroSub: "Your answers shape how we communicate with you during your 21-day journey.",
   part1Label: "Part 1 — your communication style",
   part2Label: "Part 2 — content that works for you",
   timeNote: "About 5 minutes",
   part1Complete: "Part 1 complete",
-  part1CompleteBody: "Now for the real test. We'll show you 7 actual WhatsApp messages from the 150 content system. React to each one honestly — there are no right answers, just your instinct.",
+  part1CompleteBody: "Now we'll show you some sample WhatsApp messages. React to each one as you see fit — there are no wrong answers.",
   namePrompt: "One last thing",
   nameSubprompt: "So we know whose responses these are.",
   successTitle: "Submitted. Thank you.",
@@ -138,11 +138,23 @@ const DATA = {
 
   part2Messages: [
     { type: "standard", sender: "Dr. Surabbhi Menon", sub: "150 by YouLabs", text: "Your samples reached the lab safely and processing has begun. The next 21 days are a window — not a waiting room. We'll use this time well.", time: "9:04 AM", reactions: ["This feels reassuring", "Too vague for me", "Good — I like the framing", "Feels a bit formal"] },
-    { type: "standard", sender: "Dr. Surabbhi Menon", sub: "150 by YouLabs", text: "Quick vocab note: one of your panels includes a VO₂ max estimate. It's a measure of how efficiently your body uses oxygen during effort — one of the strongest predictors of long-term health. We'll explain your result in full when it's ready.", time: "10:30 AM", reactions: ["Useful — I like knowing in advance", "This feels like too much detail", "Good balance of info", "I'd rather wait and see everything at once"] },
-    { type: "standard", sender: "Dr. Surabbhi Menon", sub: "150 by YouLabs", text: "Something to reflect on before your results arrive: what's the one number you're most curious about? There's no wrong answer — just useful context for how we personalise your debrief.", time: "2:15 PM", reactions: ["I like being asked to reflect", "Feels unnecessary", "This builds anticipation well", "I find this a bit odd"] },
+    { type: "data_reveal", sender: "Dr. Surabbhi Menon", sub: "150 by YouLabs",
+      intro: "Your panel includes a VO₂ max score, [Name].",
+      biomarkers: [
+        { color: "g", label: "VO₂ max", value: "In progress", note: "" }
+      ],
+      commentary: "Most people have never seen this number on a health report. It measures how efficiently your body uses oxygen under effort — one of the strongest predictors of how you'll age.",
+      footer: "We'll walk you through yours when it's ready. 👟",
+      time: "10:30 AM",
+      reactions: ["Useful — I like knowing this in advance", "Too much detail before results are ready", "Good balance of info", "I'd rather wait and see everything at once"],
+      followupQ: null,
+      followupSub: null,
+      followupOptions: null
+    },
+
     { type: "standard", sender: "Dr. Surabbhi Menon", sub: "150 by YouLabs", text: "Day 7 update: your metabolic panel is complete and has moved to clinical review. Inflammation markers are still processing — this batch takes a full 14 days. Everything is on schedule.", time: "9:00 AM", reactions: ["Exactly what I want", "Progress updates feel useful", "Too much process detail", "I'd prefer no updates until the end"] },
     { type: "standard", sender: "Dr. Surabbhi Menon", sub: "150 by YouLabs", text: "One small action for today: notice how you feel at 3 PM — energy, focus, mood. It takes 10 seconds and adds context we can't get from a blood panel alone.", time: "11:00 AM", reactions: ["I'd actually do this", "Feels gimmicky to me", "Interesting — I like the idea", "Too much to ask mid-process"] },
-    { type: "standard", sender: "Dr. Surabbhi Menon", sub: "150 by YouLabs", text: "Your biological age estimate is being finalised. This is one of the more nuanced outputs in your report — it draws on multiple biomarkers, not just one. We'll walk you through the methodology when we reveal it.", time: "9:45 AM", reactions: ["Building anticipation well", "This is making me anxious", "Good — I want to understand the method", "Keep these kinds of teasers coming"] },
+
     {
       type: "data_reveal",
       sender: "Dr. Surabbhi Menon", sub: "150 by YouLabs",
@@ -166,7 +178,7 @@ const DATA = {
 let part = "intro";
 let p1i = 0, p2i = 0, p2stage = "reaction";
 let p1ans = Array(7).fill(null);
-let p2ans = Array(8).fill(null);
+let p2ans = Array(6).fill(null);
 let p2fu = {};
 let respName = "";
 const app = document.getElementById("app");
@@ -185,11 +197,6 @@ function rIntro() {
     <p class="brand">${DATA.brand}</p>
     <h1 class="hero-title">${DATA.heroTitle}</h1>
     <p class="hero-sub">${DATA.heroSub}</p>
-    <div class="parts-row">
-      <div class="part-badge">${DATA.part1Label}</div>
-      <div class="part-badge">${DATA.part2Label}</div>
-    </div>
-    <p class="time-note">${DATA.timeNote}</p>
     <button class="btn-primary" onclick="go('p1')">Start →</button>`;
 }
 
@@ -222,7 +229,8 @@ function rP2() {
   const m = DATA.part2Messages[p2i];
   const pct = p2i / 8 * 100;
   const isRev = m.type === "data_reveal";
-  const showFU = isRev && p2stage === "followup";
+  const hasFollowup = isRev && m.followupQ !== null;
+  const showFU = hasFollowup && p2stage === "followup";
 
   const bubble = isRev ? `
     <div class="wa-outer">
@@ -254,7 +262,7 @@ function rP2() {
     </div>`;
 
   const canNext = isRev
-    ? (p2stage === "reaction" ? p2ans[p2i]!==null : p2fu[p2i]!==undefined)
+    ? (hasFollowup && p2stage === "followup" ? p2fu[p2i]!==undefined : p2ans[p2i]!==null)
     : p2ans[p2i]!==null;
 
   app.innerHTML = `
@@ -305,12 +313,12 @@ function backP2() {
 function nextP2() {
   const m = DATA.part2Messages[p2i];
   if(m.type==="data_reveal"){
-    if(p2stage==="reaction"){if(p2ans[p2i]===null)return;p2stage="followup";r();return;}
-    else{if(p2fu[p2i]===undefined)return;}
+    if(m.followupQ !== null && p2stage==="reaction"){if(p2ans[p2i]===null)return;p2stage="followup";r();return;}
+    else{if(m.followupQ !== null && p2fu[p2i]===undefined)return;}
   } else { if(p2ans[p2i]===null)return; }
-  if(p2i<7){p2i++;p2stage="reaction";r();}else{part="name";r();}
+  if(p2i < DATA.part2Messages.length - 1){p2i++;p2stage="reaction";r();}else{part="name";r();}
 }
-function restart() { p1ans=Array(7).fill(null);p2ans=Array(8).fill(null);p2fu={};respName="";part="intro";r(); }
+function restart() { p1ans=Array(7).fill(null);p2ans=Array(6).fill(null);p2fu={};respName="";part="intro";r(); }
 
 async function submit() {
   if(!respName) return;
